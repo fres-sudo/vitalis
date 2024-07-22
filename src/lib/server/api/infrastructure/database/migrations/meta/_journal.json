@@ -8,6 +8,41 @@
       "when": 1719512747861,
       "tag": "0000_nostalgic_skrulls",
       "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1721554621855,
+      "tag": "0001_chunky_maddog",
+      "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1721558066134,
+      "tag": "0002_curly_ulik",
+      "breakpoints": false
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1721558815523,
+      "tag": "0003_fixed_swordsman",
+      "breakpoints": false
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1721559305639,
+      "tag": "0004_powerful_the_leader",
+      "breakpoints": false
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1721560749340,
+      "tag": "0005_flippant_mindworm",
+      "breakpoints": false
     }
   ]
 }

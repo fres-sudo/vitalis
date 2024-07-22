@@ -1,0 +1,25 @@
+{
+	"/(app)": [
+		"src/routes/(app)/+page.server.ts",
+		"src/routes/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/": [
+		"src/routes/+layout.server.ts"
+	],
+	"/api/[...slug]": [
+		"src/routes/api/[...slug]/+server.ts"
+	],
+	"/(auth)/login": [
+		"src/routes/(auth)/login/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/(auth)/signup": [
+		"src/routes/(auth)/signup/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/(auth)/verify-email/[userId]/[token]": [
+		"src/routes/(auth)/verify-email/[userId]/[token]/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	]
+}
