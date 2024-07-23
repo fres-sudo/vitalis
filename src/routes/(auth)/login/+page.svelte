@@ -3,7 +3,7 @@
   import * as Form from "$lib/components/ui/form";
   import { Input } from "$lib/components/ui/input";
   import { loginDto } from "$lib/dtos/login.dto";
-  import {
+  import SuperDebug, {
     type SuperValidated,
     type Infer,
     superForm,
@@ -18,6 +18,8 @@
   });
   const { form: loginFormData, enhance: loginEnhance, errors } = loginForm;
 </script>
+
+<SuperDebug data={loginFormData} />
 
 <form
   method="POST"

@@ -6,7 +6,7 @@ import { TokensService } from "./tokens.service";
 import { LuciaProvider } from "../providers/lucia.provider";
 import { UsersRepository } from "../repositories/users.repository";
 import { now } from "@internationalized/date";
-import type { CreateUserDto } from "$lib/dtos/create-user.dto";
+import type { CreateUserDto } from "$lib/dtos/user.dto";
 import type { LoginDto } from "$lib/dtos/login.dto";
 import { HashingService } from "./hashing.service";
 import log from "$lib/utils/logger";
@@ -37,8 +37,12 @@ export class AuthService {
       if (!user) {
         throw BadRequest("invalid-email");
       }
-      const hashedPassword = await this.hashingService.hash(data.password);
-      if (user.password !== hashedPassword) {
+      const hashedPassword = await this.hashingService.verify(
+        user.password,
+        data.password,
+      );
+
+      if (!hashedPassword) {
         throw BadRequest("wrong-password");
       }
       return this.lucia.createSession(user.id, {});

@@ -11,7 +11,7 @@ import { updateEmailDto } from "../../../dtos/update-email.dto";
 import { verifyEmailDto } from "../../../dtos/verify-email.dto";
 import type { Controller } from "../interfaces/controller.interface";
 import { EmailVerificationsService } from "../services/email-verifications.service";
-import { createUserDto } from "$lib/dtos/create-user.dto";
+import { createUserDto } from "$lib/dtos/user.dto";
 import { AuthService } from "../services/auth.service";
 import { loginDto } from "$lib/dtos/login.dto";
 

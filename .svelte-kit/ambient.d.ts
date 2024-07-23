@@ -118,6 +118,7 @@ declare module '$env/static/private' {
 	export const XPC_FLAGS: string;
 	export const npm_package_devDependencies_tsyringe: string;
 	export const npm_package_devDependencies_vitest: string;
+	export const npm_package_dependencies_drizzle_zod: string;
 	export const npm_package_devDependencies_arctic: string;
 	export const npm_package_scripts_db_migrate: string;
 	export const npm_package_devDependencies_eslint_config_prettier: string;
@@ -289,6 +290,7 @@ declare module '$env/dynamic/private' {
 		XPC_FLAGS: string;
 		npm_package_devDependencies_tsyringe: string;
 		npm_package_devDependencies_vitest: string;
+		npm_package_dependencies_drizzle_zod: string;
 		npm_package_devDependencies_arctic: string;
 		npm_package_scripts_db_migrate: string;
 		npm_package_devDependencies_eslint_config_prettier: string;

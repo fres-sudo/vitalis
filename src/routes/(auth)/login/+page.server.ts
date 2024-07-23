@@ -2,7 +2,6 @@ import { fail, redirect, type Actions, type RequestEvent } from "@sveltejs/kit";
 import { zod } from "sveltekit-superforms/adapters";
 import { setError, superValidate } from "sveltekit-superforms";
 import { StatusCodes } from "$lib/constants/status-codes";
-import { createUserDto } from "$lib/dtos/create-user.dto";
 import { loginDto } from "$lib/dtos/login.dto";
 
 export const load = async () => {

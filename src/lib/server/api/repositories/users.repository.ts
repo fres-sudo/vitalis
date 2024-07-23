@@ -2,8 +2,16 @@ import { inject, injectable } from "tsyringe";
 import type { Repository } from "../interfaces/repository.interface";
 import { DatabaseProvider } from "../providers";
 import { eq, type InferInsertModel } from "drizzle-orm";
-import { usersTable } from "../infrastructure/database/tables/users.table";
 import { takeFirstOrThrow } from "../infrastructure/database/utils";
+import {
+  addressesTable,
+  citiesTable,
+  countriesTable,
+  usersTable,
+} from "./../../../tables";
+import type { User } from "$lib/dtos/user.dto";
+import log from "$lib/utils/logger";
+import { userInfo } from "os";
 
 /* -------------------------------------------------------------------------- */
 /*                                 Repository                                 */
@@ -28,8 +36,20 @@ export type UpdateUser = Partial<CreateUser>;
 export class UsersRepository implements Repository {
   constructor(@inject(DatabaseProvider) private db: DatabaseProvider) {}
 
-  async findAll() {
-    return this.db.select().from(usersTable);
+  async findAll(): Promise<User[]> {
+    return this.db.query.usersTable.findMany({
+      with: {
+        address: {
+          with: {
+            cities: {
+              with: {
+                countries: true,
+              },
+            },
+          },
+        },
+      },
+    });
   }
 
   async findOneById(id: string) {
@@ -40,7 +60,7 @@ export class UsersRepository implements Repository {
 
   async findOneByIdOrThrow(id: string) {
     const user = await this.findOneById(id);
-    if (!user) throw Error("User not found");
+    if (!user) throw Error("user-not-found");
     return user;
   }
 

@@ -1,9 +1,8 @@
 import { z } from "zod";
-import { createSelectSchema } from "drizzle-zod";
-import { usersTable } from "$lib/server/api/infrastructure/database/tables";
-import { updated } from "$app/stores";
-import { addressDto } from "./address.dto";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { usersTable } from "$lib/tables";
 
+/*
 export const userDto = z.object({
   id: z.string(),
   name: z
@@ -28,13 +27,15 @@ export const userDto = z.object({
   address: addressDto.optional(),
   createdAt: z.date(),
   updatedAt: z.date(),
-});
+});*/
 
-export const createUserDto = userDto
+export const userDto = createSelectSchema(usersTable);
+export const createUserDto = createInsertSchema(usersTable)
   .extend({
     passwordConfirmation: z.string({
       required_error: "password-confirmation-required",
     }),
+    email: z.string().email(),
   })
   .omit({
     id: true,

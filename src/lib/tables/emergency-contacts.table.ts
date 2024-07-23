@@ -1,5 +1,5 @@
 import { pgTable, varchar, text, pgEnum } from "drizzle-orm/pg-core";
-import { citext } from "../utils";
+import { citext } from "./utils";
 import { createId } from "@paralleldrive/cuid2";
 import { usersTable } from "./users.table";
 import { relations } from "drizzle-orm";

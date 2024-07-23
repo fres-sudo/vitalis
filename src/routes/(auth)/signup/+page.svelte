@@ -2,8 +2,7 @@
   import { Button, buttonVariants } from "$lib/components/ui/button";
   import * as Form from "$lib/components/ui/form";
   import { Input } from "$lib/components/ui/input";
-  import { createUserDto } from "$lib/dtos/create-user.dto.js";
-  import { loginDto } from "$lib/dtos/login.dto";
+  import { createUserDto } from "$lib/dtos/user.dto.js";
   import SuperDebug, {
     type SuperValidated,
     type Infer,

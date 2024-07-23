@@ -27,7 +27,9 @@ export const addresseRelationships = relations(
   addressesTable,
   ({ many, one }) => ({
     cities: one(citiesTable, {
-      fields: [],
+      fields: [addressesTable.cityId],
+      references: [citiesTable.id],
     }),
+    users: many(usersTable),
   }),
 );

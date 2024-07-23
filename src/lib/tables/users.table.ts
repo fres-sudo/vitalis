@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { citext, timestamps } from "../utils";
+import { citext, timestamps } from "./utils";
 import { createId } from "@paralleldrive/cuid2";
 import { sessionsTable } from "./sessions.table";
 import {
@@ -58,6 +58,10 @@ export const usersRelations = relations(usersTable, ({ many, one }) => ({
   receptionists: one(receptionistsTable, {
     fields: [usersTable.id],
     references: [receptionistsTable.userId],
+  }),
+  address: one(addressesTable, {
+    fields: [usersTable.address],
+    references: [addressesTable.id],
   }),
   appointments: many(appointmentsTable),
   medicalHistories: many(medicalHistoriesTable),

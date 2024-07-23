@@ -3,7 +3,7 @@ import { DatabaseProvider } from "../providers";
 import { and, eq, gte, lte, type InferInsertModel } from "drizzle-orm";
 import type { Repository } from "../interfaces/repository.interface";
 import { takeFirst, takeFirstOrThrow } from "../infrastructure/database/utils";
-import { emailVerificationsTable } from "../infrastructure/database/tables/email-verifications.table";
+import { emailVerificationsTable } from "$lib/tables";
 
 export type CreateEmailVerification = Pick<
   InferInsertModel<typeof emailVerificationsTable>,
