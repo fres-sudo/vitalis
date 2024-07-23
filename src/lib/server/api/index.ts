@@ -10,6 +10,7 @@ import {
 import { AuthController } from "./controllers/auth.controller";
 import { config } from "./common/config";
 import { cors } from "hono/cors";
+import { UserController } from "./controllers/user.controller";
 
 /* -------------------------------------------------------------------------- */
 /*                               Client Request                               */
@@ -38,7 +39,9 @@ app.use("*", cors({ origin: "*" })); // Allow CORS for all origins
 app.use(verifyOrigin).use(validateAuthSession);
 
 /* --------------------------------- Routes --------------------------------- */
-const routes = app.route("/auth", container.resolve(AuthController).routes());
+const routes = app
+  .route("/auth", container.resolve(AuthController).routes())
+  .route("/users", container.resolve(UserController).routes());
 
 /* -------------------------------------------------------------------------- */
 /*                                   Exports                                  */

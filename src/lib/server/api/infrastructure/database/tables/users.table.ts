@@ -8,11 +8,17 @@ import {
   text,
   varchar,
   pgEnum,
-  date,
+  timestamp,
   integer,
 } from "drizzle-orm/pg-core";
 import { emailVerificationsTable } from "./email-verifications.table";
 import { addressesTable } from "./addresses.table";
+import { doctorsTable } from "./doctors.table";
+import { patientsTable } from "./patients.table";
+import { receptionistsTable } from "./receptionists.table";
+import { appointmentsTable } from "./appointments.table";
+import { medicalHistoriesTable } from "./medical-histories.table";
+import { emergencyContactsTable } from "./emergency-contacts.table";
 
 export const gender = pgEnum("gender", ["MALE", "FEMALE", "NOT_DEFINED"]);
 export const role = pgEnum("role", ["DOCTOR", "RECEPTIONIST", "PATIENT"]);
@@ -25,7 +31,7 @@ export const usersTable = pgTable("users", {
   surname: varchar("surname", { length: 100 }).notNull(),
   gender: gender("gender").notNull().default("NOT_DEFINED"),
   role: role("role").notNull().default("PATIENT"),
-  birthdate: date("birthdate"),
+  birthdate: timestamp("birthdate"),
   address: text("address").references(() => addressesTable.id),
   phoneNumber: integer("phoneNumber"),
   avatar: text("avatar"),
@@ -41,4 +47,19 @@ export const usersRelations = relations(usersTable, ({ many, one }) => ({
     fields: [usersTable.id],
     references: [emailVerificationsTable.userId],
   }),
+  doctors: one(doctorsTable, {
+    fields: [usersTable.id],
+    references: [doctorsTable.userId],
+  }),
+  patients: one(patientsTable, {
+    fields: [usersTable.id],
+    references: [patientsTable.userId],
+  }),
+  receptionists: one(receptionistsTable, {
+    fields: [usersTable.id],
+    references: [receptionistsTable.userId],
+  }),
+  appointments: many(appointmentsTable),
+  medicalHistories: many(medicalHistoriesTable),
+  emergencyContacts: one(emergencyContactsTable),
 }));

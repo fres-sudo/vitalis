@@ -16,7 +16,7 @@ export const dictionary = {
 		"/(app)": [~3,[2]],
 		"/(auth)/login": [~4],
 		"/(auth)/signup": [~5],
-		"/(auth)/verify-email/[userId]/[token]": [~6]
+		"/(auth)/verify/[userId]/[token]": [~6]
 	};
 
 export const hooks = {

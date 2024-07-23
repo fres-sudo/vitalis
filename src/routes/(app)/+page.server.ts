@@ -2,13 +2,15 @@ import { StatusCodes } from "$lib/constants/status-codes";
 import { redirect, type Actions, type RequestEvent } from "@sveltejs/kit";
 
 export const load = async ({ locals }: RequestEvent) => {
-  const user = await locals.getAuthedUser();
-  return { user: user };
+  return {
+    users: (await locals.api.users.$get()).json(),
+    user: await locals.getAuthedUser(),
+  };
 };
 
 export const actions: Actions = {
   logout: async ({ locals }: RequestEvent) => {
     await locals.api.auth.logout.$post();
-    redirect(StatusCodes.SEE_OTHER, "/register");
+    redirect(StatusCodes.SEE_OTHER, "/signup");
   },
 };

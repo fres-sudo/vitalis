@@ -88,7 +88,7 @@ export class AuthService {
       this.mailerService.sendEmailVerificationToken({
         to: data.email,
         props: {
-          link: `${config.ORIGIN}/email/verification/${newUser.id}/:${token}`,
+          link: `${config.ORIGIN}/verify/${newUser.id}/:${token}`,
         },
       });
 

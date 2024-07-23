@@ -18,8 +18,8 @@
 		"src/routes/(auth)/signup/+page.server.ts",
 		"src/routes/+layout.server.ts"
 	],
-	"/(auth)/verify-email/[userId]/[token]": [
-		"src/routes/(auth)/verify-email/[userId]/[token]/+page.server.ts",
+	"/(auth)/verify/[userId]/[token]": [
+		"src/routes/(auth)/verify/[userId]/[token]/+page.server.ts",
 		"src/routes/+layout.server.ts"
 	]
 }

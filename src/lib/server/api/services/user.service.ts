@@ -1,6 +1,8 @@
 import { inject, injectable } from "tsyringe";
 import { LuciaProvider } from "../providers/lucia.provider";
 import type { LoginDto } from "$lib/dtos/login.dto";
+import { DatabaseProvider } from "../providers";
+import { UsersRepository } from "../repositories/users.repository";
 
 /* -------------------------------------------------------------------------- */
 /*                                   Service                                  */
@@ -22,7 +24,14 @@ simple as possible. This makes the service easier to read, test and understand.
 
 @injectable()
 export class UserService {
-  constructor(@inject(LuciaProvider) private readonly lucia: LuciaProvider) {}
+  constructor(
+    @inject(LuciaProvider) private readonly lucia: LuciaProvider,
+    @inject(UsersRepository) private readonly userRepository: UsersRepository,
+  ) {}
+
+  async getAllUsers() {
+    return this.userRepository.findAll();
+  }
 
   async logout(sessionId: string) {
     return this.lucia.invalidateSession(sessionId);

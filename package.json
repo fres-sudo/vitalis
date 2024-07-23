@@ -80,6 +80,7 @@
     "bits-ui": "^0.21.10",
     "clsx": "^2.1.1",
     "cmdk-sv": "^0.0.17",
+    "drizzle-zod": "^0.5.1",
     "embla-carousel-svelte": "^8.1.5",
     "formsnap": "^1.0.1",
     "hono-rate-limiter": "^0.3.0",

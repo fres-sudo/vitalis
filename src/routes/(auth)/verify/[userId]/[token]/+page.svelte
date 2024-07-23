@@ -1,18 +1,5 @@
 <script context="module" lang="ts">
   import type { Load } from "@sveltejs/kit";
-
-  export const load: Load = async ({ params, fetch }) => {
-    const token = params.token;
-    const userId = params.userId;
-
-    const response = await fetch(`/verify-email/${userId}/${token}`);
-
-    if (response.ok) {
-      return { success: true };
-    } else {
-      return { success: false };
-    }
-  };
 </script>
 
 <script lang="ts">

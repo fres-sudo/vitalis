@@ -103,7 +103,7 @@ export class AuthController implements Controller {
         return context.json({ status: "success" });
       })
       .get(
-        "/verify-email/:userId/:token",
+        "/verify/:userId/:token",
         limiter({ limit: 10, minutes: 60 }),
         async (context) => {
           const { userId, token } = context.req.param();
@@ -111,7 +111,7 @@ export class AuthController implements Controller {
             userId,
             token,
           );
-          return context.redirect("/login");
+          return context.json({ status: "success" });
         },
       );
   }
