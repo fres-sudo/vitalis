@@ -1,20 +1,15 @@
 import { inject, injectable } from "tsyringe";
 import { BadRequest, InternalError } from "../common/errors";
-import { DatabaseProvider } from "../providers";
 import { MailerService } from "./mailer.service";
 import { TokensService } from "./tokens.service";
 import { LuciaProvider } from "../providers/lucia.provider";
 import { UsersRepository } from "../repositories/users.repository";
-import { now } from "@internationalized/date";
 import type { CreateUserDto } from "$lib/dtos/user.dto";
 import type { LoginDto } from "$lib/dtos/login.dto";
 import { HashingService } from "./hashing.service";
-import log from "$lib/utils/logger";
 import { config } from "../common/config";
 import { EmailVerificationsService } from "./email-verifications.service";
-import { env } from "$env/dynamic/public";
 import { HTTPException } from "hono/http-exception";
-import { StatusCodes } from "$lib/constants/status-codes";
 import { EmailVerificationsRepository } from "../repositories/email-verifications.repository";
 
 @injectable()
@@ -45,9 +40,9 @@ export class AuthService {
       if (!hashedPassword) {
         throw BadRequest("wrong-password");
       }
-      return this.lucia.createSession(user.id, {});
+      const session = await this.lucia.createSession(user.id, {});
+      return this.lucia.createSessionCookie(session.id);
     } catch (e) {
-      log.info(e);
       if (e instanceof HTTPException) {
         throw e;
       }
@@ -55,26 +50,27 @@ export class AuthService {
     }
   }
 
+  /**
+   * Method to perform signup, it takes the user information as input, chech if the user
+   * already exist, hash his password, generate new token and send the email with the
+   * confirmation link.
+   *
+   * @param data is the DTO of the user to create
+   * @returns the new user creted
+   */
   async signup(data: CreateUserDto) {
     try {
-      //check if user already exist
       const existingUser = await this.usersRepository.findOneByEmail(
         data.email,
       );
       if (existingUser) {
         throw BadRequest("user-already-existing");
       }
-      //hash passwoword
       const hashedPassword = await this.hashingService.hash(data.password);
 
-      log.info(data.password);
       data.password = hashedPassword;
-      log.info({ hashedPassword });
-      log.info("updated pass: ", data.password);
-      log.info({ data });
-      //create new user instance in the database
       const newUser = await this.usersRepository.create(data);
-      // generate a token and expiry
+
       const { token, expiry, hashedToken } =
         await this.tokensService.generateTokenWithExpiryAndHash(15, "m");
 
@@ -85,20 +81,16 @@ export class AuthService {
         hashedToken,
         expiresAt: expiry,
       });
-      const id = newUser.id;
-      log.info({ id });
-      log.info({ token });
 
       this.mailerService.sendEmailVerificationToken({
         to: data.email,
         props: {
-          link: `${config.ORIGIN}/verify/${newUser.id}/:${token}`,
+          link: `${config.ORIGIN}/verify/${newUser.id}/${token}`,
         },
       });
 
       return newUser;
     } catch (e) {
-      log.info(e);
       if (e instanceof HTTPException) {
         throw e;
       }

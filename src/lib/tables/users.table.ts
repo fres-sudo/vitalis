@@ -19,6 +19,8 @@ import { receptionistsTable } from "./receptionists.table";
 import { appointmentsTable } from "./appointments.table";
 import { medicalHistoriesTable } from "./medical-histories.table";
 import { emergencyContactsTable } from "./emergency-contacts.table";
+import { passwordResetTable } from "./password-reset.table";
+import { oAuthTable } from "./oauth.table";
 
 export const gender = pgEnum("gender", ["MALE", "FEMALE", "NOT_DEFINED"]);
 export const role = pgEnum("role", ["DOCTOR", "RECEPTIONIST", "PATIENT"]);
@@ -47,6 +49,10 @@ export const usersRelations = relations(usersTable, ({ many, one }) => ({
     fields: [usersTable.id],
     references: [emailVerificationsTable.userId],
   }),
+  passwordResetTokens: one(passwordResetTable, {
+    fields: [usersTable.id],
+    references: [passwordResetTable.userId],
+  }),
   doctors: one(doctorsTable, {
     fields: [usersTable.id],
     references: [doctorsTable.userId],
@@ -63,7 +69,8 @@ export const usersRelations = relations(usersTable, ({ many, one }) => ({
     fields: [usersTable.address],
     references: [addressesTable.id],
   }),
-  appointments: many(appointmentsTable),
-  medicalHistories: many(medicalHistoriesTable),
-  emergencyContacts: one(emergencyContactsTable),
+  oAuths: one(oAuthTable, {
+    fields: [usersTable.id],
+    references: [oAuthTable.userId],
+  }),
 }));

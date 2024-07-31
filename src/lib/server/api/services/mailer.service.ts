@@ -51,7 +51,16 @@ export class MailerService {
     return this.send({
       to: data.to,
       subject: "Email Verification",
-      html: template({ token: data.props.link }),
+      html: template({ link: data.props.link }),
+    });
+  }
+
+  sendPasswordResetEmail(data: SendTemplate<{ link: string }>) {
+    const template = handlebars.compile(this.getTemplate("email-verification"));
+    return this.send({
+      to: data.to,
+      subject: "Password Reset",
+      html: template({ link: data.props.link }),
     });
   }
 
@@ -62,6 +71,17 @@ export class MailerService {
     return this.send({
       to: data.to,
       subject: "Email Change Notice",
+      html: template(null),
+    });
+  }
+
+  sendPasswordChangeNotification(data: SendTemplate<null>) {
+    const template = handlebars.compile(
+      this.getTemplate("email-change-notice"),
+    );
+    return this.send({
+      to: data.to,
+      subject: "Password Change Notice",
       html: template(null),
     });
   }

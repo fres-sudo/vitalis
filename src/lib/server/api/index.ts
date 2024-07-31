@@ -11,6 +11,7 @@ import { AuthController } from "./controllers/auth.controller";
 import { config } from "./common/config";
 import { cors } from "hono/cors";
 import { UserController } from "./controllers/user.controller";
+import log from "$lib/utils/logger";
 
 /* -------------------------------------------------------------------------- */
 /*                               Client Request                               */
@@ -35,13 +36,18 @@ import { UserController } from "./controllers/user.controller";
 const app = new Hono().basePath("/api");
 
 /* --------------------------- Global Middlewares --------------------------- */
+
 app.use("*", cors({ origin: "*" })); // Allow CORS for all origins
 app.use(verifyOrigin).use(validateAuthSession);
 
 /* --------------------------------- Routes --------------------------------- */
-const routes = app
-  .route("/auth", container.resolve(AuthController).routes())
-  .route("/users", container.resolve(UserController).routes());
+const authRoutes = container.resolve(AuthController).routes();
+const userRoutes = container.resolve(UserController).routes();
+
+log.info("authRoutes: ", authRoutes);
+log.info("userRoutes: ", userRoutes);
+const routes = app.route("/auth", authRoutes).route("/users", userRoutes);
+log.info("combinedRoutes: ", routes);
 
 /* -------------------------------------------------------------------------- */
 /*                                   Exports                                  */

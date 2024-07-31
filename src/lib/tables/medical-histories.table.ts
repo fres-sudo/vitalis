@@ -18,6 +18,9 @@ export const medicalHistoriesTable = pgTable("medicalHistories", {
 export const medicalHistoryRelationships = relations(
   medicalHistoriesTable,
   ({ many, one }) => ({
-    patients: many(patientsTable),
+    patients: one(patientsTable, {
+      fields: [medicalHistoriesTable.patientId],
+      references: [patientsTable.id],
+    }),
   }),
 );

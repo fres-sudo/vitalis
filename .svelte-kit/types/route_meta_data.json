@@ -14,6 +14,14 @@
 		"src/routes/(auth)/login/+page.server.ts",
 		"src/routes/+layout.server.ts"
 	],
+	"/(auth)/resetpassword": [
+		"src/routes/(auth)/resetpassword/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/(auth)/resetpassword/[token]": [
+		"src/routes/(auth)/resetpassword/[token]/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	],
 	"/(auth)/signup": [
 		"src/routes/(auth)/signup/+page.server.ts",
 		"src/routes/+layout.server.ts"

@@ -64,6 +64,13 @@
       "when": 1721749973332,
       "tag": "0008_fresh_maddog",
       "breakpoints": false
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1722012119604,
+      "tag": "0009_bright_blindfold",
+      "breakpoints": false
     }
   ]
 }

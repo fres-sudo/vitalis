@@ -29,11 +29,14 @@ declare module '$env/static/private' {
 	export const ORIGIN: string;
 	export const DATABASE_URL: string;
 	export const REDIS_URL: string;
+	export const GOOGLE_CLIENT_ID: string;
+	export const GOOGLE_CLIENT_SECRET: string;
 	export const npm_package_devDependencies__tailwindcss_typography: string;
 	export const npm_package_devDependencies_vite_plugin_restart: string;
 	export const MANPATH: string;
 	export const npm_package_devDependencies_prettier: string;
 	export const npm_package_dependencies_bits_ui: string;
+	export const TERM_PROGRAM: string;
 	export const npm_package_devDependencies_eslint_plugin_svelte: string;
 	export const NODE: string;
 	export const _P9K_TTY: string;
@@ -49,6 +52,7 @@ declare module '$env/static/private' {
 	export const HOMEBREW_REPOSITORY: string;
 	export const npm_package_dependencies_svelte_sonner: string;
 	export const npm_package_scripts_lint: string;
+	export const TERM_PROGRAM_VERSION: string;
 	export const npm_package_dependencies_tailwind_variants: string;
 	export const WINDOWID: string;
 	export const npm_package_scripts_dev: string;
@@ -201,11 +205,14 @@ declare module '$env/dynamic/private' {
 		ORIGIN: string;
 		DATABASE_URL: string;
 		REDIS_URL: string;
+		GOOGLE_CLIENT_ID: string;
+		GOOGLE_CLIENT_SECRET: string;
 		npm_package_devDependencies__tailwindcss_typography: string;
 		npm_package_devDependencies_vite_plugin_restart: string;
 		MANPATH: string;
 		npm_package_devDependencies_prettier: string;
 		npm_package_dependencies_bits_ui: string;
+		TERM_PROGRAM: string;
 		npm_package_devDependencies_eslint_plugin_svelte: string;
 		NODE: string;
 		_P9K_TTY: string;
@@ -221,6 +228,7 @@ declare module '$env/dynamic/private' {
 		HOMEBREW_REPOSITORY: string;
 		npm_package_dependencies_svelte_sonner: string;
 		npm_package_scripts_lint: string;
+		TERM_PROGRAM_VERSION: string;
 		npm_package_dependencies_tailwind_variants: string;
 		WINDOWID: string;
 		npm_package_scripts_dev: string;

@@ -5,6 +5,7 @@ import { emergencyContactsTable } from "./emergency-contacts.table";
 import { relations } from "drizzle-orm";
 import { doctorsTable } from "./doctors.table";
 import { appointmentsTable } from "./appointments.table";
+import { medicalHistoriesTable } from "./medical-histories.table";
 
 export const patientsTable = pgTable("patients", {
   id: text("id")
@@ -37,5 +38,6 @@ export const patientRelationships = relations(
       references: [emergencyContactsTable.id],
     }),
     appointments: many(appointmentsTable),
+    medicalHistory: many(medicalHistoriesTable),
   }),
 );

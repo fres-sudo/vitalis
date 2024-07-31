@@ -1,6 +1,6 @@
 import { Lucia } from "lucia";
 import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
-import { Discord } from "arctic";
+import { Discord, Google } from "arctic";
 import { db } from "../database";
 import { config } from "../../common/config";
 import { sessionsTable, usersTable } from "$lib/tables";
@@ -22,20 +22,14 @@ export const lucia = new Lucia(adapter, {
   },
 });
 
-//export const discord = new Discord(
-//config.DISCORD_CLIENT_ID!,
-//config.DISCORD_CLIENT_SECRET!,
-//`${config.ORIGIN}/api/iam/discord/callback`
-//);
-
 interface DatabaseUserAttributes {
   id: string;
   name: string;
   surname: string;
   address: string | null;
-  birthdate: Date | null;
+  birthdate: string | null;
   password: string | null;
-  phoneNumber: number | null;
+  phoneNumber: string | null;
   gender: "MALE" | "FEMALE" | "NOT_DEFINED" | null;
   role: "PATIENT" | "DOCTOR" | "RECEPTIONIST" | null;
   email: string;
