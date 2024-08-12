@@ -33,7 +33,6 @@ declare module '$env/static/private' {
 	export const GOOGLE_CLIENT_SECRET: string;
 	export const npm_package_devDependencies__tailwindcss_typography: string;
 	export const npm_package_devDependencies_vite_plugin_restart: string;
-	export const MANPATH: string;
 	export const npm_package_devDependencies_prettier: string;
 	export const npm_package_dependencies_bits_ui: string;
 	export const TERM_PROGRAM: string;
@@ -48,8 +47,8 @@ declare module '$env/static/private' {
 	export const TERM: string;
 	export const npm_package_scripts_db_generate: string;
 	export const npm_package_devDependencies_vite: string;
-	export const TMPDIR: string;
 	export const HOMEBREW_REPOSITORY: string;
+	export const TMPDIR: string;
 	export const npm_package_dependencies_svelte_sonner: string;
 	export const npm_package_scripts_lint: string;
 	export const TERM_PROGRAM_VERSION: string;
@@ -142,8 +141,8 @@ declare module '$env/static/private' {
 	export const npm_package_scripts_db_studio: string;
 	export const npm_package_devDependencies_bullmq: string;
 	export const npm_package_devDependencies_postgres: string;
-	export const LOGNAME: string;
 	export const LESS: string;
+	export const LOGNAME: string;
 	export const npm_package_scripts_format: string;
 	export const npm_package_devDependencies_pg: string;
 	export const npm_package_devDependencies_svelte_eslint_parser: string;
@@ -152,6 +151,7 @@ declare module '$env/static/private' {
 	export const npm_package_devDependencies_dotenv_cli: string;
 	export const npm_package_devDependencies_prettier_plugin_tailwindcss: string;
 	export const ZED_TERM: string;
+	export const BUN_INSTALL: string;
 	export const npm_package_dependencies_embla_carousel_svelte: string;
 	export const npm_config_user_agent: string;
 	export const HOMEBREW_CELLAR: string;
@@ -209,7 +209,6 @@ declare module '$env/dynamic/private' {
 		GOOGLE_CLIENT_SECRET: string;
 		npm_package_devDependencies__tailwindcss_typography: string;
 		npm_package_devDependencies_vite_plugin_restart: string;
-		MANPATH: string;
 		npm_package_devDependencies_prettier: string;
 		npm_package_dependencies_bits_ui: string;
 		TERM_PROGRAM: string;
@@ -224,8 +223,8 @@ declare module '$env/dynamic/private' {
 		TERM: string;
 		npm_package_scripts_db_generate: string;
 		npm_package_devDependencies_vite: string;
-		TMPDIR: string;
 		HOMEBREW_REPOSITORY: string;
+		TMPDIR: string;
 		npm_package_dependencies_svelte_sonner: string;
 		npm_package_scripts_lint: string;
 		TERM_PROGRAM_VERSION: string;
@@ -318,8 +317,8 @@ declare module '$env/dynamic/private' {
 		npm_package_scripts_db_studio: string;
 		npm_package_devDependencies_bullmq: string;
 		npm_package_devDependencies_postgres: string;
-		LOGNAME: string;
 		LESS: string;
+		LOGNAME: string;
 		npm_package_scripts_format: string;
 		npm_package_devDependencies_pg: string;
 		npm_package_devDependencies_svelte_eslint_parser: string;
@@ -328,6 +327,7 @@ declare module '$env/dynamic/private' {
 		npm_package_devDependencies_dotenv_cli: string;
 		npm_package_devDependencies_prettier_plugin_tailwindcss: string;
 		ZED_TERM: string;
+		BUN_INSTALL: string;
 		npm_package_dependencies_embla_carousel_svelte: string;
 		npm_config_user_agent: string;
 		HOMEBREW_CELLAR: string;

@@ -102,7 +102,8 @@
       {#if data.authedUser}
         {@render userDropdown()}
       {:else}
-        <Button href="/signup">Login</Button>
+        <Button variant="outline" href="/login">Accedi</Button>
+        <Button href="/signup">Registrati</Button>
       {/if}
     </div>
   </header>

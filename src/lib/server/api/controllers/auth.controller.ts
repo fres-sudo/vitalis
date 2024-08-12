@@ -73,7 +73,7 @@ export class AuthController implements Controller {
         .post(
           "/login",
           zValidator("json", loginDto),
-          limiter({ limit: 10, minutes: 60 }),
+          //limiter({ limit: 10, minutes: 60 }),
           async (context) => {
             const { email, password } = context.req.valid("json");
             const sessionCookie = await this.authService.login({
@@ -123,7 +123,7 @@ export class AuthController implements Controller {
         .post(
           "/signup",
           zValidator("json", createUserDto),
-          limiter({ limit: 10, minutes: 60 }),
+          //limiter({ limit: 10, minutes: 60 }),
           async (context) => {
             const newUser = context.req.valid("json");
             await this.authService.signup(newUser);

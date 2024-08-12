@@ -3,21 +3,16 @@
 </script>
 
 <script lang="ts">
-  export let data: { success: boolean };
-
-  if (data.success) {
-    // Redirect to login or show success message
-    window.location.href = "/login";
-  } else {
-    // Show error message
-    let errorMessage = "Email verification failed.";
-  }
+  export let data: { status: string };
+  const { status } = data;
 </script>
 
-<template>
-  {#if data.success}
-    <p>Verification successful! Redirecting to login...</p>
+<main>
+  {#if status === "success"}
+    <p class="text-gray-700 items-center justify-center text-center">
+      Verification successful! Redirecting to login...
+    </p>
   {:else}
-    <p>errore</p>
+    <p class="text-gray-700 items-center justify-center text-center">ERROR</p>
   {/if}
-</template>
+</main>

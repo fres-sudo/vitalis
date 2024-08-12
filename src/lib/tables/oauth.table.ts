@@ -21,6 +21,6 @@ export const oAuthTable = pgTable(
 export const oAuthRelationships = relations(oAuthTable, ({ many, one }) => ({
   users: one(usersTable, {
     fields: [oAuthTable.userId],
-    references: [oAuthTable.id],
+    references: [usersTable.id],
   }),
 }));

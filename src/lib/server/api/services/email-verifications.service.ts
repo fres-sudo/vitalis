@@ -1,11 +1,12 @@
 import { inject, injectable } from "tsyringe";
-import { BadRequest } from "../common/errors";
+import { BadRequest, InternalError } from "../common/errors";
 import { DatabaseProvider } from "../providers";
 import { MailerService } from "./mailer.service";
 import { TokensService } from "./tokens.service";
 import { UsersRepository } from "../repositories/users.repository";
 import { EmailVerificationsRepository } from "../repositories/email-verifications.repository";
 import log from "$lib/utils/logger";
+import { HTTPException } from "hono/http-exception";
 
 @injectable()
 export class EmailVerificationsService {
@@ -55,16 +56,24 @@ export class EmailVerificationsService {
   }
 
   async processEmailVerificationRequest(userId: string, token: string) {
-    const validRecord = await this.findAndBurnEmailVerificationToken(
-      userId,
-      token,
-    );
-    log.info(userId, token);
-    if (!validRecord) throw BadRequest("invalid-token");
-    await this.usersRepository.update(userId, {
-      email: validRecord.requestedEmail,
-      verified: true,
-    });
+    try {
+      const validRecord = await this.findAndBurnEmailVerificationToken(
+        userId,
+        token,
+      );
+      log.info(userId, token);
+      if (!validRecord) throw BadRequest("invalid-token");
+      await this.usersRepository.update(userId, {
+        email: validRecord.requestedEmail,
+        verified: true,
+      });
+    } catch (e) {
+      log.info(e);
+      if (e instanceof HTTPException) {
+        throw e;
+      }
+      throw InternalError("error-signup");
+    }
   }
 
   private async findAndBurnEmailVerificationToken(

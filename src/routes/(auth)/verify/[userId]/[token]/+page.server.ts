@@ -1,4 +1,4 @@
-import type { RequestEvent } from "@sveltejs/kit";
+import { redirect, type RequestEvent } from "@sveltejs/kit";
 /** @type {import('./$types').PageServerLoad} */
 
 export async function load({ params, locals }: RequestEvent) {
@@ -11,6 +11,10 @@ export async function load({ params, locals }: RequestEvent) {
     },
   });
   const data = await response.json();
+
+  if (data.status === "success") {
+    redirect(302, "/login");
+  }
   return {
     status: data.status,
   };

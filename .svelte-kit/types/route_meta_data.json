@@ -1,4 +1,7 @@
 {
+	"/(auth)": [
+		"src/routes/+layout.server.ts"
+	],
 	"/(app)": [
 		"src/routes/(app)/+page.server.ts",
 		"src/routes/+layout.server.ts",

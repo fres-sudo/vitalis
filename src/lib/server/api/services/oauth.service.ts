@@ -33,8 +33,8 @@ export class OAuthService {
     @inject(OAuthRepository) private readonly oAuthRepository: OAuthRepository,
   ) {
     this.google = new Google(
-      config.GOOGLE_CLIENT_ID,
-      config.GOOGLE_CLIENT_SECRET,
+      process.env.GOOGLE_CLIENT_ID ?? "",
+      process.env.GOOGLE_CLIENT_SECRET ?? "",
       `${config.ORIGIN}/api/auth/login/google/callback`,
     );
   }
