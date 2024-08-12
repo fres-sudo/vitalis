@@ -13,6 +13,9 @@
 	"/api/[...slug]": [
 		"src/routes/api/[...slug]/+server.ts"
 	],
+	"/(app)/help": [
+		"src/routes/+layout.server.ts"
+	],
 	"/(auth)/login": [
 		"src/routes/(auth)/login/+page.server.ts",
 		"src/routes/+layout.server.ts"
@@ -27,6 +30,10 @@
 	],
 	"/(auth)/signup": [
 		"src/routes/(auth)/signup/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/(auth)/test": [
+		"src/routes/(auth)/test/+page.server.ts",
 		"src/routes/+layout.server.ts"
 	],
 	"/(auth)/verify/[userId]/[token]": [

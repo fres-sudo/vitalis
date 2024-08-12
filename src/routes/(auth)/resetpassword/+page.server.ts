@@ -1,5 +1,6 @@
 import { StatusCodes } from "$lib/constants/status-codes";
 import { passwordResetEmailDto } from "$lib/dtos/password-reset.dto";
+import { errorMessage, successMessage } from "$lib/utils/superforms";
 import type { Actions, RequestEvent } from "@sveltejs/kit";
 import { fail, setError, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
@@ -18,16 +19,24 @@ export const actions: Actions = {
     );
 
     if (!passwordResetEmailForm.valid) {
-      console.log("Validation failed:", passwordResetEmailForm);
-
-      return fail(StatusCodes.BAD_REQUEST, { passwordResetEmailForm });
+      return errorMessage(
+        passwordResetEmailForm,
+        "L'email inserita non è valida",
+      );
     }
     const { error } = await locals.api.auth.resetpassword
       .$post({ json: passwordResetEmailForm.data })
       .then(locals.parseApiResponse);
     if (error) {
-      console.log("error:", error);
-      return setError(passwordResetEmailForm, error);
+      let message = "Si è verificato un errore durante l'invio della email.";
+      if (error === "no-user-with-this-email") {
+        message = "Non esiste alcun utente associato con questa email";
+      }
+      return errorMessage(passwordResetEmailForm, message);
     }
+    return successMessage(
+      passwordResetEmailForm,
+      "Controlla la tua casella di posta elettronica o gli spam.",
+    );
   },
 };

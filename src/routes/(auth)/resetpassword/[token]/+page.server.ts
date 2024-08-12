@@ -1,6 +1,7 @@
 import { StatusCodes } from "$lib/constants/status-codes";
 import { passwordResetDto } from "$lib/dtos/password-reset.dto";
-import type { Actions, RequestEvent } from "@sveltejs/kit";
+import { errorMessage } from "$lib/utils/superforms";
+import { redirect, type Actions, type RequestEvent } from "@sveltejs/kit";
 import { fail, setError, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 
@@ -20,9 +21,7 @@ export const actions: Actions = {
     );
 
     if (!passwordResetForm.valid) {
-      console.log("Validation failed:", passwordResetForm);
-
-      return fail(StatusCodes.BAD_REQUEST, { passwordResetForm });
+      return errorMessage(passwordResetForm, "Le password non corrispondono.");
     }
 
     const { error } = await locals.api.auth.resetpassword[":token"]
@@ -34,8 +33,15 @@ export const actions: Actions = {
       })
       .then(locals.parseApiResponse);
     if (error) {
-      console.log("error:", error);
-      return setError(passwordResetForm, error);
+      let message =
+        "Si è verificato un errore durante il recupero della password.";
+      if (error === "invalid-or-expired-token") {
+        message =
+          "Il link di recupero password è scaduto, perfavore richiedi una nuova email di recupero.";
+      }
+      return errorMessage(passwordResetForm, message);
     }
+    //if everythings goes right
+    redirect(301, "/login");
   },
 };

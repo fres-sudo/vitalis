@@ -10,18 +10,22 @@ export const nodes = [
 	() => import('./nodes/6'),
 	() => import('./nodes/7'),
 	() => import('./nodes/8'),
-	() => import('./nodes/9')
+	() => import('./nodes/9'),
+	() => import('./nodes/10'),
+	() => import('./nodes/11')
 ];
 
 export const server_loads = [0];
 
 export const dictionary = {
 		"/(app)": [~4,[2]],
-		"/(auth)/login": [~5,[3]],
-		"/(auth)/resetpassword": [~6,[3]],
-		"/(auth)/resetpassword/[token]": [~7,[3]],
-		"/(auth)/signup": [~8,[3]],
-		"/(auth)/verify/[userId]/[token]": [~9,[3]]
+		"/(app)/help": [5,[2]],
+		"/(auth)/login": [~6,[3]],
+		"/(auth)/resetpassword": [~7,[3]],
+		"/(auth)/resetpassword/[token]": [~8,[3]],
+		"/(auth)/signup": [~9,[3]],
+		"/(auth)/test": [~10,[3]],
+		"/(auth)/verify/[userId]/[token]": [~11,[3]]
 	};
 
 export const hooks = {
